@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Run sync and sanitizer
+      - name: Run sync and Play Store title scraper
         run: |
           python sync.py
 
@@ -28,10 +28,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add catalog.json catalog.min.json
+          git add catalog.json catalog.min.json titles_cache.json
           if git diff --staged --quiet; then
             echo "No changes in package catalog."
           else
-            git commit -m "chore(catalog): automated sync with upstream community definitions"
+            git commit -m "chore(catalog): automated sync with Play Store official titles"
             git push
           fi
+
